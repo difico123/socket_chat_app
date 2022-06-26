@@ -23,24 +23,18 @@ io.on("connection", (socket) => {
     console.log(`${username} join room ${room} <> ${image}`);
     socket.join(room);
 
-    // Welcome current user
-    socket.emit(
-      "message",
-      formatMessage(botName, room, "Welcome to ChatCord!", user.image)
-    );
-
     // Broadcast when a user connects
-    socket.broadcast
-      .to(room)
-      .emit(
-        "message",
-        formatMessage(
-          botName,
-          room,
-          `${user.username} has joined the chat`,
-          user.image
-        )
-      );
+    // socket.broadcast
+    //   .to(room)
+    //   .emit(
+    //     "message",
+    //     formatMessage(
+    //       botName,
+    //       room,
+    //       `${user.username} has joined the chat`,
+    //       user.image
+    //     )
+    //   );
 
     // Send users and room info
     io.to(room).emit("roomUsers", {
@@ -65,15 +59,15 @@ io.on("connection", (socket) => {
 
     if (user) {
       for (let i = 0; i < chatRooms.length; i++) {
-        io.to(chatRooms[i]).emit(
-          "message",
-          formatMessage(
-            botName,
-            1,
-            `${user.username} has left the chat`,
-            user.image
-          )
-        );
+        // io.to(chatRooms[i]).emit(
+        //   "message",
+        //   formatMessage(
+        //     botName,
+        //     1,
+        //     `${user.username} has left the chat`,
+        //     user.image
+        //   )
+        // );
 
         // Send users and room info
         io.to(chatRooms[i]).emit("roomUsers", {
